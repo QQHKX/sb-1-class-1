@@ -1,295 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>俩撒b</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
     <style>
         body {
-            font-family: 'Microsoft YaHei', Arial, sans-serif;
-            background-color: #f0f0f0;
-            transform: scale(1.3);
-            transform-origin: center;
-            background-image: url("https://th.bing.com/th/id/R.c20f67bce99e0940d4fbcba645cec451?rik=6hFmLbaImlItUA&riu=http%3a%2f%2foss.wish188.com%2f2020%2f05%2f9-1589937619-1.jpeg&ehk=llI3BH2NWZE0u32mKl53DNUau1K%2fAyAZgEOZYDBuln8%3d&risl=&pid=ImgRaw&r=0");
-            background-size: cover;
-            background-position: center;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
-            position: relative;
+            background-color: #f0f0f0;
+            margin: 0;
         }
-
-        .carousel {
-            perspective: 1200px;
-            width: 90%;
-            max-width: 340px;
-            height: 420px;
-            position: relative;
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .carousel-inner {
-            position: relative;
+        input[type="password"] {
             width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-
-        .container {
-            position: absolute;
+        button {
             width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding: 30px;
-            box-sizing: border-box;
-            backface-visibility: hidden;
-            transition: transform 1s ease;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
         }
-
-        .container.front {
-            transform: rotateY(0deg);
+        button:hover {
+            background-color: #0056b3;
         }
-
-        .container.back {
-            transform: rotateY(180deg);
-        }
-
-        .carousel.flipped .carousel-inner {
-            transform: rotateY(180deg);
-        }
-
-        img {
-            border-radius: 50%;
-            width: 140px;
-            height: 140px;
-            object-fit: cover;
-            margin-bottom: 25px;
-            border: 4px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        img:hover {
-            transform: scale(1.05);
-        }
-
-        h1 {
-            margin: 0 0 20px;
-            color: #ff0000;
-            font-size: 64px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        p {
-            color: #97118a;
-            margin: 10px 0;
-            font-size: 18px;
-            line-height: 1.6;
-            font-weight: 500;
-            -webkit-text-stroke: 0.1px black;
-        }
-
-        .marquee-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1000;
-        }
-
-        .marquee-item {
-            position: fixed;
-            white-space: nowrap;
-            font-weight: bold;
-            opacity: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+        .message {
+            margin-top: 10px;
+            color: red;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="carousel">
-        <div class="carousel-inner">
-            <div class="container front">
-                <img src="https://th.bing.com/th/id/R.c20f67bce99e0940d4fbcba645cec451?rik=6hFmLbaImlItUA&riu=http%3a%2f%2foss.wish188.com%2f2020%2f05%2f9-1589937619-1.jpeg&ehk=llI3BH2NWZE0u32mKl53DNUau1K%2fAyAZgEOZYDBuln8%3d&risl=&pid=ImgRaw&r=0" alt="头像" />
-                <h1>唐华龙</h1>
-                <p>傻逼1号</p>
-                <p>弱智玩意犯贱死妈</p>
-                <p>510108200904160094</p>
-            </div>
-            <div class="container back">
-                <img src="https://th.bing.com/th/id/R.c20f67bce99e0940d4fbcba645cec451?rik=6hFmLbaImlItUA&riu=http%3a%2f%2foss.wish188.com%2f2020%2f05%2f9-1589937619-1.jpeg&ehk=llI3BH2NWZE0u32mKl53DNUau1K%2fAyAZgEOZYDBuln8%3d&risl=&pid=ImgRaw&r=0" alt="头像" />
-                <h1>还未知</h1>
-                <p>傻逼2号</p>
-                <p>智障玩意缺爱</p>
-            </div>
-        </div>
+    <div class="login-container">
+        <input type="password" id="accessKey" placeholder="输入访问秘钥">
+        <button onclick="checkAccessKey()">登录</button>
+        <div id="message" class="message"></div>
     </div>
-    <div class="marquee-container"></div>
 
     <script>
-        // 轮播控制
-        const carousel = document.querySelector(".carousel");
-        let isFlipped = false;
+        function checkAccessKey() {
+            const inputKey = document.getElementById('accessKey').value;
+            const messageElement = document.getElementById('message');
 
-        function toggleCard() {
-            isFlipped = !isFlipped;
-            carousel.classList.toggle("flipped", isFlipped);
-        }
-
-        // 自动轮播
-        setInterval(toggleCard, 5000);
-
-        // 更新的弹幕系统
-        const messages = [
-            "别人的贱是学出来的，你是天生的。",
-            "你说你天生丽质，我看你就是天生贱制。",
-            "一闪一闪亮晶晶，我说你就是傻逼。",
-            "别动不动就爆粗口，你把你妈揣兜了随口就说。",
-            "之前以为你是颓废，原来你是报废。",
-            "哎呦喂，这狗还会说话，奇迹啊！",
-            "拿你当人的时候，你尽量装得像点好吗？",
-            "你就是缺锌缺钙弱智儿童一个。",
-            "建议你下辈子脑子长个篮球",
-            "你妈生你的时候，你妈一定被雷劈了",
-            "没素质的废物"
-        ];
-
-        const fontSizes = ["20px", "22px", "24px", "26px", "28px", "30px", "32px", "34px", "36px", "38px", "40px"]; // 增大字体大小
-        const colors = [
-            "#FF0000", // 鲜红色
-            "#00FF00", // 荧光绿
-            "#FF00FF", // 粉紫色
-            "#FFFF00", // 明黄色
-            "#00FFFF", // 青色
-            "#FFA500", // 橙色
-            "#FF1493", // 深粉色
-            "#7FFF00"  // 查特酸绿
-        ];
-
-        let lastMessageIndex = -1;
-        const usedVerticalPositions = new Set();
-
-        function getRandomMessage() {
-            let index;
-            do {
-                index = Math.floor(Math.random() * messages.length);
-            } while (index === lastMessageIndex);
-            lastMessageIndex = index;
-            return messages[index];
-        }
-
-        function createMarqueeItem(message) {
-            const item = document.createElement("div");
-            item.className = "marquee-item";
-            item.textContent = message;
-
-            // 随机样式
-            item.style.fontSize = fontSizes[Math.floor(Math.random() * fontSizes.length)];
-            item.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-            // 添加元素以获取实际尺寸
-            document.body.appendChild(item);
-            const textHeight = item.offsetHeight;
-            const textWidth = item.offsetWidth;
-            document.body.removeChild(item);
-
-            // 获取可视区域尺寸
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            // 计算垂直位置
-            const minHeight = 60;
-            const maxHeight = viewportHeight - textHeight - 60;
-            const verticalStep = Math.max(textHeight * 1.5, 40);
-            
-            let verticalPosition;
-            let attempts = 0;
-            do {
-                verticalPosition = minHeight + Math.floor(Math.random() * (maxHeight - minHeight));
-                attempts++;
-                if (attempts > 10) {
-                    usedVerticalPositions.clear();
-                    break;
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ accessKey: inputKey })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    messageElement.style.color = 'green';
+                    messageElement.textContent = '登录成功！';
+                    // 在这里可以重定向到受保护的页面
+                    window.location.href = "g11b.html";
+                } else {
+                    messageElement.style.color = 'red';
+                    messageElement.textContent = '访问秘钥错误，请重试。';
                 }
-            } while (usedVerticalPositions.has(verticalPosition));
-
-            usedVerticalPositions.add(verticalPosition);
-            item.style.top = `${verticalPosition}px`;
-
-            // 创建动画
-            const animationName = `marquee-${Math.random().toString(36).substr(2, 9)}`;
-            const keyframes = `
-            @keyframes ${animationName} {
-                0% {
-                    transform: translateX(-${textWidth}px);
-                    opacity: 0;
-                }
-                5% {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                95% {
-                    transform: translateX(${viewportWidth - textWidth}px);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateX(${viewportWidth}px);
-                    opacity: 0;
-                }
-            }`;
-
-            const styleSheet = document.createElement("style");
-            styleSheet.textContent = keyframes;
-            document.head.appendChild(styleSheet);
-
-            // 设置动画
-            const duration = 8 + Math.random() * 4; // 8-12秒的随机持续时间
-            item.style.animation = `${animationName} ${duration}s linear`;
-
-            // 清理
-            item.addEventListener("animationend", () => {
-                usedVerticalPositions.delete(verticalPosition);
-                item.remove();
-                styleSheet.remove();
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
-
-            return item;
         }
-
-        function addMarquee(container) {
-            const marqueeItem = createMarqueeItem(getRandomMessage());
-            container.appendChild(marqueeItem);
-        }
-
-        const marqueeContainer = document.querySelector(".marquee-container");
-
-        function startMarqueeSystem() {
-            function generateMarquee() {
-                if (usedVerticalPositions.size < 8) {
-                    addMarquee(marqueeContainer);
-                }
-                const nextInterval = 800 + Math.random() * 1200; // 0.8-2秒的随机间隔
-                setTimeout(generateMarquee, nextInterval);
-            }
-
-            generateMarquee();
-        }
-
-        startMarqueeSystem();
     </script>
 </body>
 </html>
