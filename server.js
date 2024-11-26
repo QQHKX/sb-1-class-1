@@ -8,7 +8,7 @@ const app = express();
 const PORT = 3000;
 
 // 预定义的访问秘钥
-const correctAccessKey = 'mySecretKey';
+const correctAccessKey = '20241';
 
 // 中间件
 app.use(bodyParser.json());

@@ -1,84 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录页面</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0;
         }
+
         .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            transform: translateY(0);
+            transition: all 0.3s ease;
         }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
         input[type="password"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
         }
+
+        input[type="password"]:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input[type="password"]::placeholder {
+            color: #aaa;
+        }
+
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             color: white;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
+
         button:hover {
-            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
+
+        button:active {
+            transform: translateY(0);
+        }
+
         .message {
-            margin-top: 10px;
-            color: red;
+            margin-top: 20px;
+            text-align: center;
             font-size: 14px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .message.error {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #dc3545;
+        }
+
+        .message.success {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #28a745;
+        }
+
+        /* 添加输入框动画效果 */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <input type="password" id="accessKey" placeholder="输入访问秘钥">
-        <button onclick="checkAccessKey()">登录</button>
+        <div class="login-header">
+            <h1>人机验证</h1>
+            <p>哪个班是职高？</p>
+        </div>
+        <div class="input-group">
+            <input type="password" id="accessKey" placeholder="202X[级]X[班](只需要输入数字即可)">
+        </div>
+        <button onclick="checkAccessKey()">登 录</button>
         <div id="message" class="message"></div>
     </div>
 
     <script>
         function checkAccessKey() {
-            const inputKey = document.getElementById('accessKey').value;
+            const inputKey = document.getElementById('accessKey');
             const messageElement = document.getElementById('message');
+            const button = document.querySelector('button');
+
+            // 添加按钮加载效果
+            button.style.opacity = '0.7';
+            button.textContent = '登录中...';
+            button.disabled = true;
 
             fetch('/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ accessKey: inputKey })
+                body: JSON.stringify({ accessKey: inputKey.value })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    messageElement.style.color = 'green';
+                    messageElement.className = 'message success';
                     messageElement.textContent = '登录成功！';
-                    // 在这里可以重定向到受保护的页面
-                    window.location.href = "g11b.html";
+                    setTimeout(() => {
+                        window.location.href = "g11b.html";
+                    }, 1000);
                 } else {
-                    messageElement.style.color = 'red';
+                    messageElement.className = 'message error';
                     messageElement.textContent = '访问秘钥错误，请重试。';
+                    inputKey.classList.add('shake');
+                    setTimeout(() => {
+                        inputKey.classList.remove('shake');
+                    }, 500);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
+                messageElement.className = 'message error';
+                messageElement.textContent = '网络错误，请稍后重试。';
+            })
+            .finally(() => {
+                // 恢复按钮状态
+                button.style.opacity = '1';
+                button.textContent = '登 录';
+                button.disabled = false;
             });
         }
     </script>
